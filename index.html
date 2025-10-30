@@ -14,6 +14,7 @@
             background-color: #f9f9f9;
             color: #333;
             line-height: 1.6;
+            scroll-behavior: smooth; /* Para rolagem suave dos links */
         }
 
         /* Container Principal */
@@ -32,7 +33,16 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            
+            /* Adiciona a transição suave para o efeito de esconder */
+            transition: transform 0.3s ease-out; 
         }
+
+        /* Esta classe será adicionada/removida via JavaScript */
+        .header-hidden {
+            transform: translateY(-100%); /* Move o header 100% para cima */
+        }
+
 
         header .container {
             display: flex;
@@ -172,8 +182,8 @@
 
         .about-image img {
             width: 100%;
-            height: 100%;         /* <-- ADICIONADO */
-            object-fit: cover;    /* <-- ADICIONADO (para não distorcer) */
+            height: 100%;         
+            object-fit: cover;    
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
@@ -291,6 +301,12 @@
             color: #aaa;
         }
 
+        /* Estilo para o botão desativado */
+        .contact-form .submit-button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+        
         .contact-form .submit-button {
             background-color: #4CAF50;
             color: white;
@@ -304,7 +320,7 @@
             transition: background-color 0.3s ease;
         }
         
-        .contact-form .submit-button:hover {
+        .contact-form .submit-button:hover:not(:disabled) {
             background-color: #45a049;
         }
 
@@ -532,7 +548,7 @@
                 <h2>Faça parte da Revolução Verde</h2>
                 <p>Seja você um investidor, um parceiro industrial ou um cliente em busca de alternativas energéticas, queremos ouvir você.</p>
                 
-                <form class="contact-form" action="#" method="POST">
+                <form class="contact-form" id="contact-form" action="https://formspree.io/f/manldvzb" method="POST">
                     <input type="text" name="nome" placeholder="Nome Completo" required>
                     <input type="email" name="email" placeholder="E-mail Corporativo" required>
                     <select name="assunto">
@@ -542,7 +558,8 @@
                         <option value="outros">Outros</option>
                     </select>
                     <textarea name="mensagem" placeholder="Sua Mensagem" required></textarea>
-                    <button type="submit" class="submit-button">ENVIAR MENSAGEM</button>
+                    
+                    <button type="submit" class="submit-button" id="submit-button">ENVIAR MENSAGEM</button>
                 </form>
             </div>
         </section>
@@ -574,5 +591,84 @@
         </div>
     </footer>
 
-</body>
+    <script>
+        // --- CÓDIGO 1: Esconder Header ao Rolar ---
+        let lastScrollTop = 0; // Guarda a última posição do scroll
+        const header = document.querySelector('header'); // Seleciona o cabeçalho
+        // Pega a altura do header para não o esconder imediatamente
+        const headerHeight = header.offsetHeight; 
+
+        window.addEventListener('scroll', function() {
+            // Pega a posição atual do scroll
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Verifica se está rolando para baixo E se já passou da altura do header
+            if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
+                // Rolando para Baixo: Adiciona a classe que esconde
+                header.classList.add('header-hidden');
+            } else {
+                // Rolando para Cima: Remove a classe que esconde
+                header.classList.remove('header-hidden');
+            }
+
+            // Atualiza a última posição do scroll
+            // (Se scrollTop <= 0, reseta para 0 para lidar com "elastic bounce" no topo)
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
+        }, false);
+
+
+        // --- CÓDIGO 2: Envio do Formulário (Formspree) ---
+        
+        // Espera o conteúdo da página carregar
+        window.addEventListener("DOMContentLoaded", function() {
+            
+            // Pega o formulário e o botão pelos IDs
+            const form = document.getElementById("contact-form");
+            const button = document.getElementById("submit-button");
+            const originalButtonText = button.textContent; // Salva o texto original
+
+            // Adiciona um "ouvinte" para quando o formulário for enviado
+            form.addEventListener("submit", async function(e) {
+                e.preventDefault(); // Impede o recarregamento da página
+
+                // Muda o texto do botão e desativa
+                button.textContent = 'Enviando...';
+                button.disabled = true;
+
+                // Pega os dados do formulário
+                const data = new FormData(form);
+                
+                try {
+                    // Envia os dados para a URL do Formspree
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: data,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    // Verifica se o envio deu certo
+                    if (response.ok) {
+                        button.textContent = 'Enviado com Sucesso! ✅';
+                        form.reset(); // Limpa o formulário
+                    } else {
+                        // Se deu erro, avisa o usuário
+                        button.textContent = 'Erro ao enviar. Tente de novo.';
+                    }
+
+                } catch (error) {
+                    // Se deu erro de rede
+                    button.textContent = 'Erro de rede. Verifique sua conexão.';
+                }
+
+                // Depois de 5 segundos, restaura o botão
+                setTimeout(() => {
+                    button.textContent = originalButtonText;
+                    button.disabled = false;
+                }, 5000);
+            });
+        });
+    </script>
+    </body>
 </html>
