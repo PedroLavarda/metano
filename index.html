@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetanoKu - O Futuro da Energia é Orgânico</title>
+    
+    <style>
+        /* Reset básico e Fontes */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container Principal */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* --- 1. Cabeçalho & Navegação --- */
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between; /* Espaça a logo da navegação */
+            align-items: center;
+        }
+
+        /* Estilo para o link da logo, agora que ela é uma imagem */
+        .logo {
+            text-decoration: none;
+            display: flex; 
+            align-items: center;
+            font-size: unset; 
+            font-weight: unset;
+            color: unset;
+        }
+        
+        /* Estilos para a logo de imagem no cabeçalho */
+        .header-logo {
+            max-width: 150px; /* Largura máxima da logo no cabeçalho. Ajuste aqui! */
+            height: auto;     /* Altura automática para manter proporção */
+            vertical-align: middle;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin-left: 25px; /* Espaçamento entre os itens da navegação */
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #2a7d2a;
+        }
+
+        /* --- 2. Seção Hero --- */
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 120px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        .cta-button {
+            background-color: #4CAF50; /* Verde principal */
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        /* --- 3. Seção de Proposta de Valor --- */
+        .value-prop {
+            padding: 60px 0;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .value-prop h2 {
+            font-size: 2.5em;
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            flex-basis: 280px;
+            padding: 20px;
+        }
+
+        .feature .icon {
+            font-size: 3em;
+            color: #4CAF50;
+        }
+
+        .feature h3 {
+            font-size: 1.5em;
+            margin: 15px 0;
+        }
+
+        /* --- 4. Seção Sobre Nós --- */
+        .about-us {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+        }
+
+        .about-us .container {
+            display: flex;
+            align-items: stretch;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .about-text, .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;         /* <-- ADICIONADO */
+            object-fit: cover;    /* <-- ADICIONADO (para não distorcer) */
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .about-text h2 {
+            font-size: 2.5em;
+            margin-top: 0;
+        }
+
+        .cta-secondary {
+            background-color: transparent;
+            color: #4CAF50;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .cta-secondary:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        /* --- 5. Seção Como Funciona --- */
+        .process {
+            padding: 60px 0;
+            text-align: center;
+            background-color: #fff;
+        }
+        
+        .process h2 {
+            font-size: 2.5em;
+            margin-bottom: 50px;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            min-width: 220px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .step h3 {
+            color: #4CAF50;
+            font-size: 1.3em;
+        }
+
+        /* --- 6. Seção de Contato (Formulário) --- */
+        .contact {
+            padding: 60px 0;
+            background-color: #333;
+            color: #fff;
+        }
+        
+        .contact .container {
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .contact p {
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            font-size: 1em;
+            box-sizing: border-box; /* Garante que o padding não afete a largura */
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #aaa;
+        }
+
+        .contact-form .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .contact-form .submit-button:hover {
+            background-color: #45a049;
+        }
+
+        /* --- 7. Rodapé --- */
+        footer {
+            background-color: #222;
+            color: #aaa;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-info {
+            flex: 2;
+            text-align: left;
+            min-width: 250px;
+        }
+        
+        .footer-info .logo {
+            font-size: unset; 
+            color: unset;
+        }
+
+        .footer-logo {
+            max-width: 150px; 
+            height: auto;
+            vertical-align: middle;
+        }
+        
+        .footer-info p {
+            margin: 5px 0 0 0;
+            font-size: 0.9em;
+        }
+
+        .footer-links {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            min-width: 200px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-social {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+            min-width: 150px;
+        }
+        
+        .footer-social a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-social a:hover {
+            color: #fff; 
+        }
+        
+        .social-icon {
+            width: 28px;
+            height: 28px;
+            stroke: currentColor; 
+        }
+
+        /* --- Responsividade --- */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav li {
+                margin: 5px 10px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .about-us .container {
+                flex-direction: column;
+            }
+            
+            footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-info, .footer-social {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo"><img src="logo-metanoku.jpeg" alt="Logo MetanoKu" class="header-logo"></a>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#solucao">Nossa Solução</a></li>
+                    <li><a href="#sustentabilidade">Sustentabilidade</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <h1>O Futuro da Energia é Orgânico.</h1>
+            <p>A MetanoKu transforma resíduos orgânicos em biocombustível de alta eficiência. Abasteça seu futuro e reduza sua pegada de carbono hoje.</p>
+            <a href="#solucao" class="cta-button">DESCUBRA NOSSAS SOLUÇÕES</a>
+        </section>
+
+        <section class="value-prop" id="solucao">
+            <div class="container">
+                <h2>Por que escolher a MetanoKu?</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-leaf-fill" viewBox="0 0 16 16">
+                                <path d="M6.162 2.035a2.76 2.76 0 0 1 4.94 1.039 2.76 2.76 0 0 1-1.038 4.94L10 8l.002.002.002.002a2.76 2.76 0 0 1 1.038 4.94 2.76 2.76 0 0 1-4.94 1.039A2.76 2.76 0 0 1 5.124 10a2.76 2.76 0 0 1 1.038-4.94L6 5l-.002-.002L5.996 5a2.76 2.76 0 0 1-1.038-4.94z"/>
+                            </svg>
+                        </div>
+                        <h3>Sustentabilidade Real</h3>
+                        <p>Nosso processo utiliza resíduos orgânicos, que seriam descartados, e os converte em energia limpa, combatendo o desperdício.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-lightning-charge-fill" viewBox="0 0 16 16">
+                                <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.032z"/>
+                            </svg>
+                        </div>
+                        <h3>Alto Desempenho</h3>
+                        <p>Desenvolvemos um biocombustível que oferece performance e eficiência energética superiores para sua operação.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 4.9 4c1.552 0-2.94-.707-3.857-1.818a.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                            </svg>
+                        </div>
+                        <h3>Economia Circular</h3>
+                        <p>Utilizamos resíduos agroindustriais e aterros como matéria-prima. É a verdadeira economia circular em ação.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-us" id="sustentabilidade">
+            <div class="container">
+                <div class="about-text">
+                    <h2>Nossa Missão: Revolucionar a Matriz Energética</h2>
+                    <p>Na MetanoKu, não estamos apenas criando combustível. Estamos criando um ciclo de vida energético completo. Nascemos da urgência de encontrar soluções viáveis para a crise climática e da oportunidade de ver valor onde outros veem lixo.</p>
+                    <p>Nossa tecnologia patenteada de processamento de biomassa garante um combustível puro, estável e pronto para mover a indústria, o transporte e a agricultura.</p>
+                    <a href="#contato" class="cta-secondary">CONHEÇA NOSSA TECNOLOGIA</a>
+                </div>
+                <div class="about-image">
+                    <img src="usina.jpg" alt="Instalação de biogás">
+                </div>
+            </div>
+        </section>
+
+        <section class="process">
+            <div class="container">
+                <h2>Transformando Resíduos em Movimento</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <h3>Etapa 1: Coleta</h3>
+                        <p>Coletamos biomassa e resíduos orgânicos da agroindústria e centros urbanos.</p>
+                    </div>
+                    <div class="step">
+                        <h3>Etapa 2: Processamento</h3>
+                        <p>A biomassa é processada e fermentada em nossos biorreatores para criar o biocombustível bruto.</p>
+                    </div>
+                    <div class="step">
+                        <h3>Etapa 3: Refino</h3>
+                        <p>O biocombustível bruto é filtrado e refinado para se tornar um combustível de alta pureza e eficiência.</p>
+                    </div>
+                    <div class="step">
+                        <h3>Etapa 4: Energia Limpa</h3>
+                        <p>O combustível final é usado em veículos e na indústria, substituindo combustíveis fósseis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contato">
+            <div class="container">
+                <h2>Faça parte da Revolução Verde</h2>
+                <p>Seja você um investidor, um parceiro industrial ou um cliente em busca de alternativas energéticas, queremos ouvir você.</p>
+                
+                <form class="contact-form" action="#" method="POST">
+                    <input type="text" name="nome" placeholder="Nome Completo" required>
+                    <input type="email" name="email" placeholder="E-mail Corporativo" required>
+                    <select name="assunto">
+                        <option value="parceria">Interesse em Parceria</option>
+                        <option value="vendas">Interesse em Vendas</option>
+                        <option value="imprensa">Imprensa</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                    <textarea name="mensagem" placeholder="Sua Mensagem" required></textarea>
+                    <button type="submit" class="submit-button">ENVIAR MENSAGEM</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-info">
+                <a href="#" class="logo"><img src="logo-metanoku.jpeg" alt="Logo MetanoKu" class="footer-logo"></a>
+                <p>© 2025 MetanoKu Biocombustíveis Ltda.<br>Todos os direitos reservados.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Imprensa</a>
+                <a href="#">Carreiras</a>
+                <a href="#">Privacidade</a>
+            </div>
+            
+            <div class="footer-social">
+                <a href="https://www.instagram.com/invites/contact/?igsh=xnh43kqe4v1j&utm_content=zscbm4b" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="social-icon">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
+            
+        </div>
+    </footer>
+
+</body>
+</html>
